@@ -1,0 +1,38 @@
+.battle_component {
+  margin: 5% 0;
+  .title {
+    text-align: center;
+  }
+  .battle_container {
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: center;
+    align-items: center;
+    .pokemon_box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 50%;
+      }
+    }
+    .scoreboard {
+      text-align: center;
+      .base {
+        border: solid 1px;
+        margin: 0.3rem;
+        border-radius: 4px;
+        width: 10rem;
+      }
+    }
+  }
+  .btn_container {
+    display: flex;
+    justify-content: center;
+    .fight_btn {
+      width: 9rem;
+      font-size: 1.7rem;
+      padding: 0.6rem;
+    }
+  }
+}

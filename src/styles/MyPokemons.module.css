@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  margin: 60px;
+
+  border: 3px solid black;
+}
+
+.intro {
+  text-align: center;
+}
+
+.counterP {
+  margin: 5% 0 1%;
+  font-size: 1.5em;
+}
+
+.counter {
+  text-decoration: dotted;
+}
+
+.yourpokemons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  /* border: 3px solid blue; */
+  padding: 1%;
+  margin: 1% 0 2%;
+  flex-wrap: wrap;
+}
+
+.pokemonContainer {
+  border: 3px solid black;
+  width: 200px;
+  height: 200px;
+  /* background-color: #f0f0f0; */
+}
+
+.pokemonName {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.pokemonImage {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  transition: 0.3s;
+  /* border-radius: 50%; */
+}
+
+.pokemonImage:hover {
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+.yourPokemonsPag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  /* border: 3px solid green; */
+  padding: 1%;
+  margin: 0 0 2%;
+}
+
+.pagButton {
+  background-color: #f0f0f0;
+  padding: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.toggleButton {
+  background-color: rgb(221, 221, 221);
+  font-size: 1rem;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

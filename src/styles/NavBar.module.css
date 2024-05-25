@@ -1,0 +1,81 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 3% auto 2%;
+  max-width: 700px;
+  height: 100px;
+  border-radius: 3px;
+}
+
+.nav > * {
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  background-color: transparent;
+  transition: 0.7s;
+  max-width: 100px;
+  margin: 0 auto;
+  border: 0;
+  display: inline-block;
+}
+
+.button {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.5rem;
+  transition: 0.7s ease-in;
+
+}
+
+.nav_container:hover {
+  transform: scale(1.1);
+  pointer-events: visible;
+}
+
+.navImg {
+  width: 100px;
+  height: 70px;
+  transition: 0.7s ease-in;
+  background: unset;
+  border: 0;
+}
+
+.darkMode {
+  font-size: 1.5rem;
+  transition: 0.7s ease-in;
+  background: unset;
+  border: 0;
+  width: 20px;
+}
+
+.mode_container {
+  width: 20px;
+}
+
+.pokeball {
+  transition: 0.5s;
+  width: 100px;
+  height: 70px;
+  background-color: transparent;
+}
+
+.pokeballContainer {
+  background-color: transparent;
+}
+
+.pokeballContainer:hover {
+  transform: rotate(360deg);
+}
+
+.pokeballContainer:hover::after {
+  transition: content 0.5s;
+}
+
+.logoutImg, .logout_container {
+  background-color: white;
+  border: none;
+  color: white;
+  width: 60px;
+}

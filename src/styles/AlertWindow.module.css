@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: solid 4px green;
+  border-radius: 10px;
+  text-align: center;
+  padding: 3rem;
+  max-width: 20rem;
+  margin: auto;
+  align-items: center;
+  h3 {
+    font-size: 1.5rem;
+    color: green;
+  }
+  a {
+    max-width: 6rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+  }
+}

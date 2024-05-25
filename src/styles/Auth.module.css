@@ -1,0 +1,10 @@
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 50px auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+

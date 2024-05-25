@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10%;
+  border: 3px solid black;
+  padding: 1% 5%;
+  margin: 1% 5%;
+  width: 80vw;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10%;
+  border: 3px solid black;
+  padding: 1% 5%;
+  margin: 1% 5%;
+  width: 80vw;
+  transition: 0.3s;
+}
+
+.userContainer:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.pokemonsTotal {
+  width: 100%;
+}
+
+/* .pagination {
+  composes: yourPokemonsPag from "./MyPokemons.module.css";
+}
+
+.pagButton {
+  composes: pagButton from "./MyPokemons.module.css";
+} */

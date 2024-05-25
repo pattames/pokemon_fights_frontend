@@ -1,0 +1,40 @@
+/* The Signup component has the same styles as the Login component. */
+.container {
+  composes: container from './Login.module.css';
+}
+
+.form {
+  composes: form from './Login.module.css';
+}
+
+.title {
+  composes: title from './Login.module.css';
+}
+
+.inputContainer {
+  composes: inputContainer from './Login.module.css';
+}
+
+.label {
+  composes: label from './Login.module.css';
+}
+
+.input {
+  composes: input from './Login.module.css';
+}
+
+.usernameInput {
+  composes: usernameInput from './Login.module.css';
+}
+
+.autofill {
+  composes: autofill from './Login.module.css';
+}
+
+.passwordInput {
+  composes: passwordInput from './Login.module.css';
+}
+
+.button {
+  composes: button from './Login.module.css';
+}
