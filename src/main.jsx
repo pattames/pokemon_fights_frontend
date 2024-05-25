@@ -12,8 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        {" "}
-        {/* Wrap your app with ThemeProvider */}
         <AuthContextProvider>
           <SelectPokeContextProvider>
             <DataContextProvider>
