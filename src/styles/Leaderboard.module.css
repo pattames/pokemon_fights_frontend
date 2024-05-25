@@ -14,8 +14,9 @@
   gap: 10%;
   border: 3px solid black;
   padding: 1% 5%;
-  margin: 1% 5%;
+  margin: 1% auto;
   width: 80vw;
+  background-color: rgb(228, 228, 228);
 }
 
 .userContainer {
@@ -23,9 +24,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 10%;
-  border: 3px solid black;
+  border: 2px solid black;
   padding: 1% 5%;
-  margin: 1% 5%;
+  margin: 1% auto;
   width: 80vw;
   transition: 0.3s;
 }
@@ -39,8 +40,8 @@
 .pokemonsTotal {
   width: 100%;
 }
-
-/* .pagination {
+/* 
+.pagination {
   composes: yourPokemonsPag from "./MyPokemons.module.css";
 }
 

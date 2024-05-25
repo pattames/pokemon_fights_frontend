@@ -7,7 +7,7 @@ import GoodPokemon from "./GoodPokemon";
 import BadPokemon from "./BadPokemon";
 import AlertWindow from "./AlertWindow";
 
-function Battle() {
+function Battle({ user, setUser }) {
   //Data
   const { pokemon, loading } = useContext(DataContext);
   //from context hook to select poke
@@ -31,15 +31,15 @@ function Battle() {
   //Number of rounds tracker
   const [roundsCompleted, setRoundsCompleted] = useState(0);
   //User
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   //Alert window
   const [alertWindow, setAlertWindow] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      setUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     setUser(JSON.parse(localStorage.getItem("user")));
+  //   }
+  // }, [user]);
 
   //Set user pokemon
   useEffect(() => {
@@ -173,7 +173,9 @@ function Battle() {
               ...user,
               pokemons: [...user.pokemons, String(opponentPokemon.id)],
             };
+            //update user and make it persistent in local storage
             setUser(updatedUser);
+            localStorage.setItem("user", JSON.stringify(updatedUser));
             // Call updateUser function to update the user's pokemons on the server
             updateUser(updatedUser);
             setUserPokemon(false);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import style from "../styles/Login.module.css";
 
-export default function Login({onAuthenticate})  {
+export default function Login({ onAuthenticate }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -14,13 +14,13 @@ export default function Login({onAuthenticate})  {
     if (userData) {
       const userObj = JSON.parse(userData);
       setStoredUser(userObj.username);
-      }
-    }, []);
+    }
+  }, []);
 
-    const handleAutoFill = async (e) => {
-      e.preventDefault();
-      setUsername(storedUser);
-    };
+  const handleAutoFill = async (e) => {
+    e.preventDefault();
+    setUsername(storedUser);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,30 +49,34 @@ export default function Login({onAuthenticate})  {
 
   return (
     <div className={style.container}>
-    <form className={style.form} onSubmit={handleSubmit}>
-      <h3 className={style.title}>Login</h3>
-      <div className={style.inputContainer}>
-        <label className={style.label}>username:</label>
-        <input
-          className={`${style.usernameInput} ${style.input}`}
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+      <form className={style.form} onSubmit={handleSubmit}>
+        <h3 className={style.title}>Login</h3>
+        <div className={style.inputContainer}>
+          <label className={style.label}>username:</label>
+          <input
+            className={`${style.usernameInput} ${style.input}`}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
-          {storedUser && <button className={style.autofill} onClick={handleAutoFill}>Auto-fill</button>}
-      </div>
-      <div className={style.inputContainer}>
-        <label className={style.label}>password:</label>
-        <input
-          className={`${style.passwordInput} ${style.input}`}
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className={style.button}>Log in</button>
-      {error && <div className="error">{error}</div>}
-    </form>
+          {storedUser && (
+            <button className={style.autofill} onClick={handleAutoFill}>
+              Auto-fill
+            </button>
+          )}
+        </div>
+        <div className={style.inputContainer}>
+          <label className={style.label}>password:</label>
+          <input
+            className={`${style.passwordInput} ${style.input}`}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button className={style.button}>Log in</button>
+        {error && <div className="error">{error}</div>}
+      </form>
     </div>
   );
 }

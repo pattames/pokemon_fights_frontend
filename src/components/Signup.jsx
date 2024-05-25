@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useReducer } from "react";
 
 import style from "../styles/Signup.module.css";
 
@@ -26,17 +27,18 @@ export default function Signup({ setUser }) {
       setError(data.error);
       setUsername("");
       setPassword("");
+      return;
     }
 
-    if (response.ok) {
-      console.log("RESPONSE WAS OK");
-      localStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
-      setIsLoading(false);
-      setUsername("");
-      setPassword("");
-      // alert("User created. Please log in");
-    }
+    console.log("RESPONSE WAS OK");
+    localStorage.setItem("user", JSON.stringify(data));
+    setUser(data);
+    setIsLoading(false);
+    setUsername("");
+    setPassword("");
+
+    console.log(data);
+    // alert("User created. Please log in");
   };
 
   return (
@@ -44,7 +46,7 @@ export default function Signup({ setUser }) {
       <form className={style.form} onSubmit={handleSubmit}>
         <h3 className={style.title}>Signup</h3>
         <div className={style.inputContainer}>
-          <label className={style.label}>username:</label>
+          <label className={style.label}>Username:</label>
           <input
             className={`${style.usernameInput} ${style.input}`}
             type="text"
@@ -61,7 +63,9 @@ export default function Signup({ setUser }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className={style.button}>Sign up</button>
+        <button className={style.button} disabled={isLoading}>
+          {isLoading ? "Loading..." : "Sign up"}
+        </button>
         {error && <div className="error">{error}</div>}
       </form>
     </div>

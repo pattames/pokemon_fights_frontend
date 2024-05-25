@@ -1,8 +1,19 @@
 import React from "react";
 
 const MainContent = ({ username }) => {
-  // Receive username prop
-  return <div>{/* <h2>Welcome to the Pokemon World, {username}!</h2> */}</div>;
+  return (
+    <div
+      style={{
+        textAlign: "center",
+        marginBlockStart: "0",
+        fontSize: "1.5rem",
+      }}
+    >
+      <h2>
+        Welcome, <span style={{ color: "green" }}>{username}</span>!
+      </h2>
+    </div>
+  );
 };
 
 export default MainContent;

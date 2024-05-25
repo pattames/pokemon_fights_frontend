@@ -3,8 +3,9 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 
-function MyPokemons({ currentUser }) {
+function MyPokemons({ user, currentUser }) {
   const { loading, pokemon, users } = useContext(DataContext);
+
   //from context hook to select poke
   const { setSelectPokemon, battleCount } = useContext(SelectPokeContext);
 
@@ -15,31 +16,13 @@ function MyPokemons({ currentUser }) {
   // Derived states for UI
   const [displayedPokemons, setDisplayedPokemons] = useState([]);
 
-  const pokemonTypes = {
-    Normal: "#A8A77A",
-    Fire: "#EE8130",
-    Water: "#6390F0",
-    Electric: "#F7D02C",
-    Grass: "#7AC74C",
-    Ice: "#96D9D6",
-    Fighting: "#C22E28",
-    Poison: "#A33EA1",
-    Ground: "#E2BF65",
-    Flying: "#A98FF3",
-    Psychic: "#F95587",
-    Bug: "#A6B91A",
-    Rock: "#B6A136",
-    Ghost: "#735797",
-    Dragon: "#6F35FC",
-    Dark: "#705746",
-    Steel: "#B7B7CE",
-    Fairy: "#D685AD",
-  };
-
+  console.log(user);
+  //
   useEffect(() => {
-    const loggedInUser = users.find((user) => user.username === currentUser);
+    if (loading || !users.length || !pokemon.length) return;
+
+    const loggedInUser = user;
     if (!loggedInUser) return; // If no user is found, simply return.
-    // console.log(loggedInUser)
     const reversedPokemons = [...loggedInUser.pokemons].reverse();
 
     let pokemonsToDisplay;
@@ -79,14 +62,6 @@ function MyPokemons({ currentUser }) {
     // console.log(pokemon)
   }, [users, pokemon, currentPage, showAll, loading, currentUser, battleCount]);
 
-  const nextPage = () =>
-    setCurrentPage((current) =>
-      Math.min(
-        current + 1,
-        Math.ceil(displayedPokemons.length / itemsPerPage) - 1
-      )
-    );
-  const prevPage = () => setCurrentPage((current) => Math.max(current - 1, 0));
   const toggleShowAll = () => setShowAll((current) => !current); // Toggle function
 
   if (loading) return <div>Loading...</div>;
@@ -96,59 +71,32 @@ function MyPokemons({ currentUser }) {
       <section className={style.container}>
         <div className={style.intro}>
           <h1>Select your fighter</h1>
-          {/* <p className={style.counterP}>
-            You've catched:
-            <span className={style.counter}>
-              {" "}
-              {displayedPokemons.length} Pokemon
-            </span>
-          </p> */}
         </div>
         <div
           className={`${style.yourpokemons} ${showAll ? style.vertical : ""}`}
         >
-          {" "}
-          {/* Apply vertical class if showAll is true */}
-          {displayedPokemons.map((pokemon, index) => (
-            <div
-              key={index}
-              className={style.pokemonContainer}
-              onClick={() => setSelectPokemon(pokemon)}
-            >
-              <h3 className={style.pokemonName}>{pokemon.name}</h3>
-              <div>
-                {/* <div style={{ backgroundColor: pokemonTypes[pokemon.type[0]] }}> */}
-                <img
-                  className={style.pokemonImage}
-                  src={pokemon.image}
-                  alt={pokemon.name}
-                />
+          {user.pokemons.length &&
+            displayedPokemons.map((pokemon, index) => (
+              <div
+                key={index}
+                className={style.pokemonContainer}
+                onClick={() => setSelectPokemon(pokemon)}
+              >
+                <h3 className={style.pokemonName}>{pokemon.name}</h3>
+                <div>
+                  <img
+                    className={style.pokemonImage}
+                    src={pokemon.image}
+                    alt={pokemon.name}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className={style.yourPokemonsPag}>
-          {/* <button
-            onClick={prevPage}
-            disabled={currentPage <= 0 || showAll}
-            className={style.pagButton}
-          >
-            Previous
-          </button> */}
-          {/* <button
-            onClick={nextPage}
-            disabled={
-              (currentPage + 1) * itemsPerPage >= displayedPokemons.length ||
-              showAll
-            }
-            className={style.pagButton}
-          >
-            Next
-          </button> */}
           <button onClick={toggleShowAll} className={style.toggleButton}>
             {showAll ? "Show less" : "Show all"}
           </button>{" "}
-          {/* Toggle button */}
         </div>
       </section>
     </>
