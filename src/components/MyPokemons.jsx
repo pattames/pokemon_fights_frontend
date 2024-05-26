@@ -3,21 +3,19 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 
-function MyPokemons({ user, currentUser }) {
+function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
   const { loading, pokemon, users } = useContext(DataContext);
-
   //from context hook to select poke
-  const { setSelectPokemon, battleCount } = useContext(SelectPokeContext);
+  const { setSelectPokemon, battleCount, selectPokemon } =
+    useContext(SelectPokeContext);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 3;
-  const [showAll, setShowAll] = useState(false); // New state for toggle
-
-  // Derived states for UI
+  const [showAll, setShowAll] = useState(false);
   const [displayedPokemons, setDisplayedPokemons] = useState([]);
 
-  console.log(user);
-  //
+  const itemsPerPage = 3;
+
+  //Caos de paul para definir displayed pokemon
   useEffect(() => {
     if (loading || !users.length || !pokemon.length) return;
 
@@ -62,6 +60,19 @@ function MyPokemons({ user, currentUser }) {
     // console.log(pokemon)
   }, [users, pokemon, currentPage, showAll, loading, currentUser, battleCount]);
 
+  //Select pokemon click hanlder
+  const handlePokemonSelect = (pokemon) => {
+    setSelectPokemon(pokemon);
+    scrollToAllPokemon();
+  };
+
+  //If selectPokemon is truthy, scroll to battle
+  useEffect(() => {
+    if (selectPokemon) {
+      setTimeout(scrollToAllPokemon, 2);
+    }
+  }, [selectPokemon]);
+
   const toggleShowAll = () => setShowAll((current) => !current); // Toggle function
 
   if (loading) return <div>Loading...</div>;
@@ -80,7 +91,7 @@ function MyPokemons({ user, currentUser }) {
               <div
                 key={index}
                 className={style.pokemonContainer}
-                onClick={() => setSelectPokemon(pokemon)}
+                onClick={() => handlePokemonSelect(pokemon)}
               >
                 <h3 className={style.pokemonName}>{pokemon.name}</h3>
                 <div>
