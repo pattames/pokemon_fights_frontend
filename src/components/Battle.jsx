@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import styles from "../styles/Battle.module.css";
 import { SelectPokeContext } from "../context/SelectPokeContext";
-
 import GoodPokemon from "./GoodPokemon";
 import BadPokemon from "./BadPokemon";
 import AlertWindow from "./AlertWindow";
@@ -11,8 +10,13 @@ function Battle({ user, setUser }) {
   //Data
   const { pokemon, loading } = useContext(DataContext);
   //from context hook to select poke
-  const { selectPokemon, selectOpponent, setBattleCount } =
-    useContext(SelectPokeContext);
+  const {
+    selectPokemon,
+    selectOpponent,
+    setSelectPokemon,
+    setSelectOpponent,
+    setBattleCount,
+  } = useContext(SelectPokeContext);
   //Hard coded pokemon (demo)
   // const ivysaur = pokemon[0];
   // const charmander = pokemon[3];
@@ -180,11 +184,17 @@ function Battle({ user, setUser }) {
             updateUser(updatedUser);
             setUserPokemon(false);
             setOpponentPokemon(false);
+            setSelectPokemon(false);
+            setSelectOpponent(false);
             // alert("You win! New pokemon added");
             setAlertWindow(true);
           }
         } else {
           alert("You lose :(");
+          setUserPokemon(false);
+          setOpponentPokemon(false);
+          setSelectPokemon(false);
+          setSelectOpponent(false);
         }
         // Reset rounds for next battle
         setRoundsCompleted(0);

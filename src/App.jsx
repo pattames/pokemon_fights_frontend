@@ -16,10 +16,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
+  //to scroll:
   const allPokemonsRef = useRef(null);
   const leaderboardRef = useRef(null);
-
-  //El pedo del primer render es el mapeo de Paul
+  const battleRef = useRef(null);
 
   const { battleCount } = useContext(SelectPokeContext);
 
@@ -63,12 +63,25 @@ function App() {
                   key={battleCount}
                   user={user}
                   currentUser={user?.username}
+                  scrollToAllPokemon={() =>
+                    allPokemonsRef.current.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
                 />
               )}
               <div ref={allPokemonsRef}>
-                <AllPokemon />
+                <AllPokemon
+                  scrollToBattle={() =>
+                    battleRef.current.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
+                />
               </div>
-              <Battle user={user} setUser={setUser} />
+              <div ref={battleRef}>
+                <Battle user={user} setUser={setUser} />
+              </div>
               <div ref={leaderboardRef}>
                 <Leaderboard />
               </div>
