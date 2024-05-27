@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 
-function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
+function MyPokemons({ user, currentUser, scrollToAllPokemon, setAlertWindow }) {
   const { loading, pokemon, users } = useContext(DataContext);
   //from context hook to select poke
   const { setSelectPokemon, battleCount, selectPokemon } =
@@ -64,6 +64,7 @@ function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
   const handlePokemonSelect = (pokemon) => {
     setSelectPokemon(pokemon);
     scrollToAllPokemon();
+    setAlertWindow(false);
   };
 
   //If selectPokemon is truthy, scroll to battle

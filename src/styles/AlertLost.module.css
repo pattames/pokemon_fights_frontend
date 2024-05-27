@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  border: solid 4px green;
+  border: solid 4px red;
   border-radius: 10px;
   text-align: center;
   padding: 3rem;
@@ -10,7 +10,7 @@
   align-items: center;
   h3 {
     font-size: 1.5rem;
-    color: green;
+    color: red;
   }
   a {
     max-width: 6rem;
@@ -18,7 +18,7 @@
     border-radius: 5px;
     text-decoration: none;
     color: white;
-    background-color: green;
+    background-color: red;
     cursor: pointer;
   }
 }

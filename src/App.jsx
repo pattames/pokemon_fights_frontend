@@ -16,6 +16,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
+  const [alertWindow, setAlertWindow] = useState(false);
+  const [alertLost, setAlertLost] = useState(false);
   //to scroll:
   const allPokemonsRef = useRef(null);
   const leaderboardRef = useRef(null);
@@ -68,6 +70,7 @@ function App() {
                       behavior: "smooth",
                     })
                   }
+                  setAlertWindow={setAlertWindow}
                 />
               )}
               <div ref={allPokemonsRef}>
@@ -80,7 +83,19 @@ function App() {
                 />
               </div>
               <div ref={battleRef}>
-                <Battle user={user} setUser={setUser} />
+                <Battle
+                  user={user}
+                  setUser={setUser}
+                  scrollToTopPage={() =>
+                    topPageRef.current.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
+                  alertWindow={alertWindow}
+                  setAlertWindow={setAlertWindow}
+                  alertLost={alertLost}
+                  setAlertLost={setAlertLost}
+                />
               </div>
               <div ref={leaderboardRef}>
                 <Leaderboard />

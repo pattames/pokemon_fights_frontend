@@ -5,8 +5,16 @@ import { SelectPokeContext } from "../context/SelectPokeContext";
 import GoodPokemon from "./GoodPokemon";
 import BadPokemon from "./BadPokemon";
 import AlertWindow from "./AlertWindow";
+import AlertLost from "./AlertLost";
 
-function Battle({ user, setUser }) {
+function Battle({
+  user,
+  setUser,
+  alertWindow,
+  setAlertWindow,
+  alertLost,
+  setAlertLost,
+}) {
   //Data
   const { pokemon, loading } = useContext(DataContext);
   //from context hook to select poke
@@ -37,7 +45,6 @@ function Battle({ user, setUser }) {
   //User
   // const [user, setUser] = useState(null);
   //Alert window
-  const [alertWindow, setAlertWindow] = useState(false);
 
   // useEffect(() => {
   //   if (!user) {
@@ -190,11 +197,12 @@ function Battle({ user, setUser }) {
             setAlertWindow(true);
           }
         } else {
-          alert("You lose :(");
+          // alert("You lose :(");
           setUserPokemon(false);
           setOpponentPokemon(false);
           setSelectPokemon(false);
           setSelectOpponent(false);
+          setAlertLost(true);
         }
         // Reset rounds for next battle
         setRoundsCompleted(0);
@@ -285,7 +293,8 @@ function Battle({ user, setUser }) {
             </div>
           )}
         </div>
-        {alertWindow && <AlertWindow />}
+        {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
+        {alertLost && <AlertLost setAlertLost={setAlertLost} />}
       </div>
     </>
   );
