@@ -71,6 +71,7 @@ function App() {
                     })
                   }
                   setAlertWindow={setAlertWindow}
+                  setAlertLost={setAlertLost}
                 />
               )}
               <div ref={allPokemonsRef}>
