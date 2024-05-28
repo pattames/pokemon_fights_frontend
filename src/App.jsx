@@ -22,6 +22,7 @@ function App() {
   const allPokemonsRef = useRef(null);
   const leaderboardRef = useRef(null);
   const battleRef = useRef(null);
+  const myPokemonRef = useRef(null);
 
   const { battleCount } = useContext(SelectPokeContext);
 
@@ -48,8 +49,8 @@ function App() {
           authenticated ? (
             <>
               <NavBar
-                scrollToAllPokemon={() =>
-                  allPokemonsRef.current.scrollIntoView({
+                scrollToMyPokemon={() =>
+                  myPokemonRef.current.scrollIntoView({
                     behavior: "smooth",
                   })
                 }
@@ -61,18 +62,20 @@ function App() {
               />
               <MainContent username={user?.username} />
               {user && user.pokemons.length && (
-                <MyPokemons
-                  key={battleCount}
-                  user={user}
-                  currentUser={user?.username}
-                  scrollToAllPokemon={() =>
-                    allPokemonsRef.current.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                  setAlertWindow={setAlertWindow}
-                  setAlertLost={setAlertLost}
-                />
+                <div ref={myPokemonRef}>
+                  <MyPokemons
+                    key={battleCount}
+                    user={user}
+                    currentUser={user?.username}
+                    scrollToAllPokemon={() =>
+                      allPokemonsRef.current.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
+                    setAlertWindow={setAlertWindow}
+                    setAlertLost={setAlertLost}
+                  />
+                </div>
               )}
               <div ref={allPokemonsRef}>
                 <AllPokemon

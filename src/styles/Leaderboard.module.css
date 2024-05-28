@@ -7,6 +7,10 @@
   margin-top: 2rem;
 }
 
+.title {
+  font-size: 2rem;
+}
+
 .headers {
   display: flex;
   justify-content: space-between;
@@ -17,6 +21,7 @@
   margin: 1% auto;
   width: 80vw;
   background-color: rgb(228, 228, 228);
+  max-width: 50rem;
 }
 
 .userContainer {
@@ -29,6 +34,7 @@
   margin: 1% auto;
   width: 80vw;
   transition: 0.3s;
+  max-width: 50rem;
 }
 
 .userContainer:hover {
