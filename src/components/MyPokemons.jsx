@@ -111,8 +111,24 @@ function MyPokemons({
                 key={index}
                 className={style.pokemonContainer}
                 onClick={() => handlePokemonSelect(pokemon)}
+                style={{
+                  border:
+                    selectPokemon && selectPokemon.name === pokemon.name
+                      ? "5px solid green"
+                      : "3px solid black", // Default border for non-selected
+                }}
               >
-                <h3 className={style.pokemonName}>{pokemon.name}</h3>
+                <h3
+                  className={style.pokemonName}
+                  style={{
+                    color:
+                      selectPokemon && selectPokemon.name === pokemon.name
+                        ? "green"
+                        : "black",
+                  }}
+                >
+                  {pokemon.name}
+                </h3>
                 <div>
                   <img
                     className={style.pokemonImage}

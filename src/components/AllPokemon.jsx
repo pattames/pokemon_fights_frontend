@@ -58,8 +58,22 @@ export default function AllPokemon({ scrollToBattle }) {
                       key={poke.id}
                       className="allPOkemon--pokemonCardSmall"
                       onClick={() => handlePokemonSelection(poke)}
+                      style={{
+                        border:
+                          selectOpponent &&
+                          selectOpponent.name === poke.name &&
+                          "solid green 5px",
+                      }}
                     >
-                      <div className="allPokemon--card">
+                      <div
+                        className="allPokemon--card"
+                        style={{
+                          color:
+                            selectOpponent &&
+                            selectOpponent.name === poke.name &&
+                            "green",
+                        }}
+                      >
                         <h3>{poke.name.english}</h3>
                         <h4>{poke.name.chinese}</h4>
                         <p>ID: {poke.id}</p>
