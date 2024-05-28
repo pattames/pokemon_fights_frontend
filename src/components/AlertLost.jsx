@@ -7,9 +7,11 @@ export default function AlertLost({ setAlertLost }) {
   };
 
   return (
-    <div className={styles.container}>
-      <h3>You lose! :(</h3>
-      <a onClick={clickHandler}>Try again</a>
+    <div className={styles.window}>
+      <div className={styles.container}>
+        <h3>You lose! :(</h3>
+        <a onClick={clickHandler}>Try again</a>
+      </div>
     </div>
   );
 }

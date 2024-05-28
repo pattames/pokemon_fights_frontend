@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { DataContext } from "../context/DataContext";
 import styles from "../styles/Battle.module.css";
 import { SelectPokeContext } from "../context/SelectPokeContext";
@@ -15,8 +15,8 @@ function Battle({
   alertLost,
   setAlertLost,
 }) {
-  //Data
-  const { pokemon, loading } = useContext(DataContext);
+  //Refs
+  const alertWindowRef = useRef(null);
   //from context hook to select poke
   const {
     selectPokemon,
@@ -51,6 +51,9 @@ function Battle({
   //     setUser(JSON.parse(localStorage.getItem("user")));
   //   }
   // }, [user]);
+
+  //Scroll to alert window
+  const scrollToWindow = () => alertWindowRef.current.scrollIntoView();
 
   //Set user pokemon
   useEffect(() => {
@@ -195,6 +198,7 @@ function Battle({
             setSelectOpponent(false);
             // alert("You win! New pokemon added");
             setAlertWindow(true);
+            setTimeout(scrollToWindow, 3);
           }
         } else {
           // alert("You lose :(");
@@ -203,6 +207,7 @@ function Battle({
           setSelectPokemon(false);
           setSelectOpponent(false);
           setAlertLost(true);
+          setTimeout(scrollToWindow, 3);
         }
         // Reset rounds for next battle
         setRoundsCompleted(0);
@@ -293,8 +298,10 @@ function Battle({
             </div>
           )}
         </div>
-        {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
-        {alertLost && <AlertLost setAlertLost={setAlertLost} />}
+        <div ref={alertWindowRef}>
+          {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
+          {alertLost && <AlertLost setAlertLost={setAlertLost} />}
+        </div>
       </div>
     </>
   );

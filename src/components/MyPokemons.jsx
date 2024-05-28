@@ -1,5 +1,5 @@
 import style from "../styles/MyPokemons.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../context/DataContext";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 
@@ -18,6 +18,9 @@ function MyPokemons({
   const [currentPage, setCurrentPage] = useState(0);
   const [showAll, setShowAll] = useState(false);
   const [displayedPokemons, setDisplayedPokemons] = useState([]);
+
+  //Component ref
+  const componentRef = useRef(null);
 
   const itemsPerPage = 3;
 
@@ -81,13 +84,21 @@ function MyPokemons({
     }
   }, [selectPokemon]);
 
-  const toggleShowAll = () => setShowAll((current) => !current); // Toggle function
+  //show all/less handler
+  const toggleShowAll = () => {
+    setShowAll((current) => !current);
+    setTimeout(() => {
+      componentRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 10);
+  }; // Toggle function
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <>
-      <section className={style.container}>
+      <section className={style.container} ref={componentRef}>
         <div className={style.intro}>
           <h1>Select your fighter</h1>
         </div>

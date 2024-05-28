@@ -7,9 +7,9 @@ function Leaderboard() {
 
   // Sort users by the number of pokemons they have in descending order
   // Ensure sorting happens after users are fetched from the context
-  const sortedUsers = users.sort(
-    (a, b) => b.pokemons.length - a.pokemons.length
-  );
+  const sortedUsers = users
+    .sort((a, b) => b.pokemons.length - a.pokemons.length)
+    .slice(0, 5);
 
   return (
     <section className={style.container}>
