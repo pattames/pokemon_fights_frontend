@@ -249,9 +249,25 @@ function Battle({
               <div className={styles.pokemon_box}>
                 <h3>HP: {userCount}/5</h3>
                 {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
+                <style>
+                  {`
+@keyframes moveDiagonallyR {
+    0%, 100% { 
+      transform: translate(0, 0); 
+    }
+    50% { 
+      transform: translate(100px, -70px);
+    }
+  }
+`}
+                </style>
                 <img
                   src={userPokemon && userPokemon.image}
                   alt="user pokemon"
+                  style={{
+                    position: "relative",
+                    animation: "moveDiagonallyR 1s 5",
+                  }}
                 />
               </div>
               <div className={styles.scoreboard}>
