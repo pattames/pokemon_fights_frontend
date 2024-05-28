@@ -1,17 +1,19 @@
 .container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   border: 3px solid black;
-  margin: 2rem auto;
+  margin: 2rem 0;
   border: 3px solid black;
   max-width: 80rem;
+  display: inline-block;
 }
 
 .intro {
   text-align: center;
+  padding-bottom: 0;
 }
 
 .counterP {
@@ -29,8 +31,9 @@
   align-items: center;
   gap: 2.5rem;
   /* border: 3px solid blue; */
-  padding: 1%;
-  margin: 1% 0 2%;
+  /* padding: 1%;
+  margin: 1% 0 2%; */
+  /* padding: 2rem 10rem; */
   flex-wrap: wrap;
 }
 

@@ -16,4 +16,5 @@ body {
   background-color: var(--background-color); /* Use var to apply CSS variable */
   color: var(--text-color);
   line-height: 1.6;
+  text-align: center;
 }

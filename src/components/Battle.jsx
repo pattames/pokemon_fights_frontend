@@ -238,7 +238,7 @@ function Battle({
               <div className={styles.battle_container}>
                 <div className={styles.pokemon_box}>
                   <h3>HP: {userCount}/5</h3>
-                  <h2>{userPokemon && userPokemon.namejapanese}</h2>
+                  {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
                   <img
                     src={userPokemon && userPokemon.image}
                     alt="user pokemon"
@@ -278,7 +278,7 @@ function Battle({
                 </div>
                 <div className={styles.pokemon_box}>
                   <h3>HP: {opponentCount}/5</h3>
-                  <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2>
+                  {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
                   <img
                     src={opponentPokemon && opponentPokemon.image.hires}
                     alt="opponent pokemon"
