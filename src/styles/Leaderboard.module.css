@@ -38,7 +38,7 @@
 }
 
 .userContainer:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
   background-color: black;
   color: white;
 }

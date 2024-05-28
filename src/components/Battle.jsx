@@ -31,6 +31,8 @@ function Battle({
   //Dynamic pokemon
   const [userPokemon, setUserPokemon] = useState(null);
   const [opponentPokemon, setOpponentPokemon] = useState(null);
+  //Disable button
+  const [disableButton, setDisableButton] = useState(false);
   //HP counters
   const [userCount, setUserCount] = useState(5);
   const [opponentCount, setOpponentCount] = useState(5);
@@ -71,6 +73,8 @@ function Battle({
 
   //Handle click (battle rounds & winner)
   function handleClick() {
+    //Disable buton
+    setDisableButton(true);
     //If userpokemon attack > opponentpokemon attack setUserCount (count - 1)
     function attackRound() {
       if (userPokemon.base.Attack >= opponentPokemon.base.Attack) {
@@ -222,6 +226,8 @@ function Battle({
         setSpeedColor(null);
         //Battle count +1
         setBattleCount((prevCount) => prevCount + 1);
+        //Enable button
+        setDisableButton(false);
       }, 100);
     }
   }, [roundsCompleted, userCount, opponentCount, user, setUser]);
@@ -235,73 +241,72 @@ function Battle({
 
   return (
     <>
-      <div className={styles.masterContainer}>
+      {userPokemon && opponentPokemon && (
         <div className={styles.battle_container}>
-          {userPokemon && opponentPokemon && (
-            <div className={styles.battle_component}>
-              <h1 className={styles.title}>Battlefield</h1>
-              <div className={styles.battle_container}>
-                <div className={styles.pokemon_box}>
-                  <h3>HP: {userCount}/5</h3>
-                  {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
-                  <img
-                    src={userPokemon && userPokemon.image}
-                    alt="user pokemon"
-                  />
+          <div className={styles.battle_component}>
+            <h1 className={styles.title}>Battlefield</h1>
+            <div className={styles.element_container}>
+              <div className={styles.pokemon_box}>
+                <h3>HP: {userCount}/5</h3>
+                {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
+                <img
+                  src={userPokemon && userPokemon.image}
+                  alt="user pokemon"
+                />
+              </div>
+              <div className={styles.scoreboard}>
+                <div
+                  className={styles.base}
+                  style={{ background: attackColor }}
+                >
+                  Attack
                 </div>
-                <div className={styles.scoreboard}>
-                  <div
-                    className={styles.base}
-                    style={{ background: attackColor }}
-                  >
-                    Attack
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: defenseColor }}
-                  >
-                    Defense
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: spAttackColor }}
-                  >
-                    Sp. Attack
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: spDefenseColor }}
-                  >
-                    Sp. Defense
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: speedColor }}
-                  >
-                    Speed
-                  </div>
+                <div
+                  className={styles.base}
+                  style={{ background: defenseColor }}
+                >
+                  Defense
                 </div>
-                <div className={styles.pokemon_box}>
-                  <h3>HP: {opponentCount}/5</h3>
-                  {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
-                  <img
-                    src={opponentPokemon && opponentPokemon.image.hires}
-                    alt="opponent pokemon"
-                  />
+                <div
+                  className={styles.base}
+                  style={{ background: spAttackColor }}
+                >
+                  Sp. Attack
+                </div>
+                <div
+                  className={styles.base}
+                  style={{ background: spDefenseColor }}
+                >
+                  Sp. Defense
+                </div>
+                <div className={styles.base} style={{ background: speedColor }}>
+                  Speed
                 </div>
               </div>
-              <div className={styles.btn_container}>
-                <button className={styles.fight_btn} onClick={handleClick}>
-                  Fight!
-                </button>
+              <div className={styles.pokemon_box}>
+                <h3>HP: {opponentCount}/5</h3>
+                {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
+                <img
+                  src={opponentPokemon && opponentPokemon.image.hires}
+                  alt="opponent pokemon"
+                />
               </div>
             </div>
-          )}
+            <div className={styles.btn_container}>
+              <button
+                className={styles.fight_btn}
+                disabled={disableButton}
+                onClick={handleClick}
+              >
+                Fight!
+              </button>
+            </div>
+          </div>
         </div>
-        <div ref={alertWindowRef}>
-          {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
-          {alertLost && <AlertLost setAlertLost={setAlertLost} />}
-        </div>
+      )}
+      <div ref={alertWindowRef}>
+        {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
+        {alertLost && <AlertLost setAlertLost={setAlertLost} />}
       </div>
     </>
   );

@@ -1,70 +1,82 @@
-.battle_component {
+.battle_container {
   margin: 2rem 0;
-  border: solid 3px black;
-  max-width: 80rem;
-  padding: 3rem 0;
-  background-image: url("src/public/poke_battlefield.jpeg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 5px;
   display: inline-block;
-  .title {
-    text-align: center;
-    margin: 0;
-    color: black;
-    background-color: white;
-    font-size: 2rem;
-  }
-  .battle_container {
-    display: flex;
-    /* justify-content: space-around; */
-    justify-content: center;
-    align-items: center;
-    .pokemon_box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      h3 {
-        background-color: white;
-        padding: 0.5rem;
-        border-radius: 5px;
-      }
-      img {
-        /* background-color: white; */
-        padding: 2rem;
-        margin: 1rem;
-        border-radius: 5px;
-        width: 50%;
-      }
-    }
-    .scoreboard {
+  border: solid 3px black;
+  padding: 10px;
+  .battle_component {
+    /* border: solid 3px black; */
+    max-width: 80rem;
+    padding: 3rem 0;
+    background-image: url("src/public/arena2.webp");
+    background-size: cover;
+    background-position: center;
+    /* border-radius: 5px; */
+    .title {
       text-align: center;
+      margin: 0;
+      color: black;
       background-color: white;
-      padding: 1rem;
-      border-radius: 10px;
-      .base {
-        border: solid 1px;
-        margin: 0.3rem;
-        border-radius: 4px;
-        /* width: 150px; */
-        width: 120px;
+      font-size: 2rem;
+      padding: 0;
+    }
+    .element_container {
+      display: flex;
+      /* justify-content: space-around; */
+      justify-content: center;
+      align-items: center;
+      .pokemon_box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h3 {
+          background-color: white;
+          border: solid 1px;
+          padding: 0.5rem;
+          border-radius: 5px;
+        }
+        img {
+          /* background-color: white; */
+          padding: 2rem;
+          margin: 1rem;
+          border-radius: 5px;
+          width: 50%;
+        }
+      }
+      .scoreboard {
+        text-align: center;
+        /* background-color: white; */
+        padding: 1rem;
+        border-radius: 10px;
+        .base {
+          background-color: white;
+          border: solid 1px;
+          margin: 0.3rem;
+          border-radius: 4px;
+          /* width: 150px; */
+          width: 120px;
+        }
       }
     }
-  }
-  .btn_container {
-    display: flex;
-    justify-content: center;
-    .fight_btn {
-      width: 9rem;
-      font-size: 1.7rem;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 5px;
-      /* background-color: rgb(222, 222, 222); */
-      cursor: pointer;
-      letter-spacing: 3px;
-      background-color: black;
-      color: white;
+    .btn_container {
+      display: flex;
+      justify-content: center;
+      .fight_btn {
+        width: 9rem;
+        font-size: 1.7rem;
+        padding: 0.6rem;
+        border: none;
+        border-radius: 5px;
+        /* background-color: rgb(222, 222, 222); */
+        cursor: pointer;
+        letter-spacing: 3px;
+        background-color: white;
+        color: black;
+        border: solid black 1px;
+      }
+      .fight_btn:hover {
+        transform: scale(1.2);
+        transition: 0.3s;
+      }
     }
   }
 }

@@ -16,7 +16,7 @@
 .nav > * {
   /* border: 1px solid rgba(0, 0, 0, 0.1); */
   background-color: transparent;
-  transition: 0.7s;
+  transition: 0.3s;
   max-width: 100px;
   margin: 0 auto;
   border: 0;
