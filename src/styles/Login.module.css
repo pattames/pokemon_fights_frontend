@@ -36,6 +36,9 @@
   background-color: rgb(222, 222, 222);
   border-radius: 5px;
 }
+/* .input:focus {
+  border: solid green 3px;
+} */
 
 /* .usernameInput {
   background-color: green;
@@ -55,7 +58,16 @@
 } */
 
 .button {
-  padding: 12px 28px;
   border-radius: 5px;
-  border: none;
+  border: solid black 2px;
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  /* max-width: 70%; */
+  margin: 0 auto;
+}
+.button:hover {
+  transform: scale(1.1);
 }

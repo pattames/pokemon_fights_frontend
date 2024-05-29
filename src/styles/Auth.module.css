@@ -5,10 +5,34 @@
   margin: 0 auto;
   align-items: center;
   justify-content: center;
+  h2 {
+    margin-top: -15%;
+    margin-bottom: 12%;
+    color: green;
+    letter-spacing: 4px;
+    text-align: center;
+    font-size: 1.8rem;
+  }
   .logo {
-    margin-top: -60px;
-    margin-bottom: -40px;
+    margin-top: -20%;
+    margin-bottom: -15%;
     /* width: 20rem; */
     width: 90%;
+    transition: 0.3s ease-out;
+  }
+  .logo:hover {
+    transform: scale(1.1);
+  }
+  .message {
+    margin: 2rem 0;
+    font-size: 1.2rem;
+  }
+  .message_span {
+    color: red;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+  }
+  .message_span:hover {
+    transform: scale(1.2);
   }
 }

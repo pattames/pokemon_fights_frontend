@@ -44,25 +44,27 @@ export default function Signup({ setUser }) {
   return (
     <div className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
-        <h3 className={style.title}>Signup</h3>
+        {/* <h3 className={style.title}>Register!</h3> */}
         <div className={style.inputContainer}>
-          <label className={style.label}>Username:</label>
+          {/* <label className={style.label}>Username:</label> */}
           <input
             className={`${style.usernameInput} ${style.input}`}
             type="text"
             value={username}
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label className={style.label}>password:</label>
+          {/* <label className={style.label}>password:</label> */}
           <input
             className={`${style.passwordInput} ${style.input}`}
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button className={style.button} disabled={isLoading}>
-          {isLoading ? "Loading..." : "Sign up"}
+          {isLoading ? "Loading..." : "Register"}
         </button>
         {error && <div className="error">{error}</div>}
       </form>

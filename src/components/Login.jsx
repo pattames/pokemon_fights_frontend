@@ -50,7 +50,7 @@ export default function Login({ onAuthenticate }) {
   return (
     <div className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
-        <h3 className={style.title}>Login</h3>
+        {/* <h3 className={style.title}>Log In!</h3> */}
         <div className={style.inputContainer}>
           {/* <label className={style.label}>Username:</label> */}
           <input
