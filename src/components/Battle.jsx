@@ -33,6 +33,8 @@ function Battle({
   const [opponentPokemon, setOpponentPokemon] = useState(null);
   //Disable button
   const [disableButton, setDisableButton] = useState(false);
+  //Animation
+  const [animation, setAnimation] = useState(false);
   //HP counters
   const [userCount, setUserCount] = useState(5);
   const [opponentCount, setOpponentCount] = useState(5);
@@ -42,6 +44,8 @@ function Battle({
   const [spAttackColor, setSpAttackColor] = useState();
   const [spDefenseColor, setSpDefenseColor] = useState();
   const [speedColor, setSpeedColor] = useState();
+  //Wait
+  const [wait, setWait] = useState(false);
   //Number of rounds tracker
   const [roundsCompleted, setRoundsCompleted] = useState(0);
   //User
@@ -71,86 +75,6 @@ function Battle({
     }
   }, [selectOpponent]);
 
-  //Handle click (battle rounds & winner)
-  function handleClick() {
-    //Disable buton
-    setDisableButton(true);
-    //If userpokemon attack > opponentpokemon attack setUserCount (count - 1)
-    function attackRound() {
-      if (userPokemon.base.Attack >= opponentPokemon.base.Attack) {
-        setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-        setAttackColor("green");
-      } else {
-        setUserCount((prevUserCount) => prevUserCount - 1);
-        //red background for style.base
-        setAttackColor("red");
-      }
-      //Completed round track
-      setRoundsCompleted((prevValue) => prevValue + 1);
-    }
-    attackRound();
-    //Same but for defense + 1sec delay
-    function defenseRound() {
-      setTimeout(() => {
-        if (userPokemon.base.Defense >= opponentPokemon.base.Defense) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setDefenseColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setDefenseColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 1000);
-    }
-    defenseRound();
-    //Same but for Sp Attack +2sec delay
-    function spAttackRound() {
-      setTimeout(() => {
-        if (
-          userPokemon.base["Sp. Attack"] >= opponentPokemon.base["Sp. Attack"]
-        ) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpAttackColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpAttackColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 2000);
-    }
-    spAttackRound();
-    //Same but for Sp Defense +3sec delay
-    function spDefenseRound() {
-      setTimeout(() => {
-        if (
-          userPokemon.base["Sp. Defense"] >= opponentPokemon.base["Sp. Defense"]
-        ) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpDefenseColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpDefenseColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 3000);
-    }
-    spDefenseRound();
-    //Same but for Speed +4sec delay
-    function speedRound() {
-      setTimeout(() => {
-        if (userPokemon.base.Speed >= opponentPokemon.base.Speed) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpeedColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpeedColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 4000);
-    }
-    speedRound();
-  }
-
   //Update the user in database
   const updateUser = async (updatedUser) => {
     try {
@@ -176,6 +100,93 @@ function Battle({
       console.error("Error updating user pokemons:", error);
     }
   };
+
+  //Handle click (battle rounds & winner)
+  function handleClick() {
+    //Disable buton
+    setDisableButton(true);
+    //start animation
+    setAnimation(true);
+    //If userpokemon attack > opponentpokemon attack setUserCount (count - 1)
+    function attackRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Attack >= opponentPokemon.base.Attack) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setAttackColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          //red background for style.base
+          setAttackColor("red");
+        }
+        //Completed round track
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 200);
+    }
+    attackRound();
+    //Same but for defense + 1sec delay
+    function defenseRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Defense >= opponentPokemon.base.Defense) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setDefenseColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setDefenseColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 1200);
+    }
+    defenseRound();
+    //Same but for Sp Attack +2sec delay
+    function spAttackRound() {
+      setTimeout(() => {
+        if (
+          userPokemon.base["Sp. Attack"] >= opponentPokemon.base["Sp. Attack"]
+        ) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpAttackColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpAttackColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 2200);
+    }
+    spAttackRound();
+    //Same but for Sp Defense +3sec delay
+    function spDefenseRound() {
+      setTimeout(() => {
+        if (
+          userPokemon.base["Sp. Defense"] >= opponentPokemon.base["Sp. Defense"]
+        ) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpDefenseColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpDefenseColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 3200);
+    }
+    spDefenseRound();
+    //Same but for Speed +4sec delay
+    function speedRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Speed >= opponentPokemon.base.Speed) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpeedColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpeedColor("red");
+        }
+        //Wait for animation to finish before adding the last round
+        setTimeout(() => {
+          setRoundsCompleted((prevValue) => prevValue + 1);
+        }, 600);
+      }, 4200);
+    }
+    speedRound();
+  }
 
   //If rounds completed === 5:
   //If (userCounter > opponentCounter), user wins
@@ -228,6 +239,8 @@ function Battle({
         setBattleCount((prevCount) => prevCount + 1);
         //Enable button
         setDisableButton(false);
+        //disable animation
+        setAnimation(false);
       }, 100);
     }
   }, [roundsCompleted, userCount, opponentCount, user, setUser]);
@@ -256,7 +269,7 @@ function Battle({
       transform: translate(0, 0); 
     }
     50% { 
-      transform: translate(100px, -70px);
+      transform: translate(100px, -40px);
     }
   }
 `}
@@ -265,8 +278,8 @@ function Battle({
                   src={userPokemon && userPokemon.image}
                   alt="user pokemon"
                   style={{
-                    position: "relative",
-                    animation: "moveDiagonallyR 1s 5",
+                    position: animation && "relative",
+                    animation: animation && "moveDiagonallyR 1s 5",
                   }}
                 />
               </div>
@@ -302,9 +315,25 @@ function Battle({
               <div className={styles.pokemon_box}>
                 <h3>HP: {opponentCount}/5</h3>
                 {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
+                <style>
+                  {`
+@keyframes moveDiagonallyL {
+    0%, 100% { 
+      transform: translate(0, 0); 
+    }
+    50% { 
+      transform: translate(-100px, -40px);
+    }
+  }
+`}
+                </style>
                 <img
                   src={opponentPokemon && opponentPokemon.image.hires}
                   alt="opponent pokemon"
+                  style={{
+                    position: animation && "relative",
+                    animation: animation && "moveDiagonallyL 1s 5",
+                  }}
                 />
               </div>
             </div>
