@@ -45,15 +45,17 @@
       .scoreboard {
         text-align: center;
         /* background-color: white; */
-        padding: 1rem;
+        /* padding: 1rem; */
         border-radius: 10px;
+        /* width: 15%; */
         .base {
           background-color: white;
           border: solid 1px;
-          margin: 0.3rem;
+          margin: 0.3rem 0;
           border-radius: 4px;
           /* width: 150px; */
-          width: 120px;
+          width: 130px;
+          /* width: 113px; */
         }
       }
     }
