@@ -1,0 +1,28 @@
+.window {
+  margin: 2rem 0;
+  .container {
+    /* display: flex;
+    flex-direction: column; */
+    border: solid 4px red;
+    border-radius: 10px;
+    text-align: center;
+    padding: 3rem;
+    width: 15rem;
+    margin: 8rem 0;
+    /* align-items: center; */
+    display: inline-block;
+    h3 {
+      font-size: 1.5rem;
+      color: red;
+    }
+    a {
+      max-width: 6rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      color: white;
+      background-color: red;
+      cursor: pointer;
+    }
+  }
+}

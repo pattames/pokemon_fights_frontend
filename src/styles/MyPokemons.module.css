@@ -1,17 +1,22 @@
 .container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   border: 3px solid black;
-  margin: 2rem auto;
+  margin: 2rem 0;
   border: 3px solid black;
   max-width: 80rem;
+  display: inline-block;
 }
 
 .intro {
   text-align: center;
+  padding-bottom: 0;
+  h1 {
+    font-size: 2rem;
+  }
 }
 
 .counterP {
@@ -27,17 +32,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  /* gap: 2.5rem; */
   /* border: 3px solid blue; */
-  padding: 1%;
-  margin: 1% 0 2%;
+  /* padding: 1%;
+  margin: 1% 0 2%; */
+  /* padding: 2rem 10rem; */
   flex-wrap: wrap;
+  margin: 0 3rem;
 }
 
 .pokemonContainer {
   border: 3px solid black;
   width: 200px;
   height: 200px;
+  margin: 1.5rem;
   /* background-color: #f0f0f0; */
 }
 
@@ -57,7 +65,7 @@
 
 .pokemonImage:hover {
   cursor: pointer;
-  margin-top: -10px;
+  margin-top: -20px;
 }
 
 .yourPokemonsPag {
@@ -84,4 +92,5 @@
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 1.5rem;
 }

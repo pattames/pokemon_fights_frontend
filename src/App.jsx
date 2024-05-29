@@ -16,10 +16,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
+  const [alertWindow, setAlertWindow] = useState(false);
+  const [alertLost, setAlertLost] = useState(false);
   //to scroll:
   const allPokemonsRef = useRef(null);
   const leaderboardRef = useRef(null);
   const battleRef = useRef(null);
+  const myPokemonRef = useRef(null);
 
   const { battleCount } = useContext(SelectPokeContext);
 
@@ -46,8 +49,8 @@ function App() {
           authenticated ? (
             <>
               <NavBar
-                scrollToAllPokemon={() =>
-                  allPokemonsRef.current.scrollIntoView({
+                scrollToMyPokemon={() =>
+                  myPokemonRef.current.scrollIntoView({
                     behavior: "smooth",
                   })
                 }
@@ -59,16 +62,20 @@ function App() {
               />
               <MainContent username={user?.username} />
               {user && user.pokemons.length && (
-                <MyPokemons
-                  key={battleCount}
-                  user={user}
-                  currentUser={user?.username}
-                  scrollToAllPokemon={() =>
-                    allPokemonsRef.current.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                />
+                <div ref={myPokemonRef}>
+                  <MyPokemons
+                    key={battleCount}
+                    user={user}
+                    currentUser={user?.username}
+                    scrollToAllPokemon={() =>
+                      allPokemonsRef.current.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
+                    setAlertWindow={setAlertWindow}
+                    setAlertLost={setAlertLost}
+                  />
+                </div>
               )}
               <div ref={allPokemonsRef}>
                 <AllPokemon
@@ -80,7 +87,19 @@ function App() {
                 />
               </div>
               <div ref={battleRef}>
-                <Battle user={user} setUser={setUser} />
+                <Battle
+                  user={user}
+                  setUser={setUser}
+                  scrollToTopPage={() =>
+                    topPageRef.current.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
+                  alertWindow={alertWindow}
+                  setAlertWindow={setAlertWindow}
+                  alertLost={alertLost}
+                  setAlertLost={setAlertLost}
+                />
               </div>
               <div ref={leaderboardRef}>
                 <Leaderboard />

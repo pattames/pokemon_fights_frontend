@@ -1,9 +1,15 @@
 import style from "../styles/MyPokemons.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../context/DataContext";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 
-function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
+function MyPokemons({
+  user,
+  currentUser,
+  scrollToAllPokemon,
+  setAlertWindow,
+  setAlertLost,
+}) {
   const { loading, pokemon, users } = useContext(DataContext);
   //from context hook to select poke
   const { setSelectPokemon, battleCount, selectPokemon } =
@@ -12,6 +18,9 @@ function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [showAll, setShowAll] = useState(false);
   const [displayedPokemons, setDisplayedPokemons] = useState([]);
+
+  //Component ref
+  const componentRef = useRef(null);
 
   const itemsPerPage = 3;
 
@@ -60,10 +69,12 @@ function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
     // console.log(pokemon)
   }, [users, pokemon, currentPage, showAll, loading, currentUser, battleCount]);
 
-  //Select pokemon click hanlder
+  //Select pokemon handlder
   const handlePokemonSelect = (pokemon) => {
     setSelectPokemon(pokemon);
     scrollToAllPokemon();
+    setAlertWindow(false);
+    setAlertLost(false);
   };
 
   //If selectPokemon is truthy, scroll to battle
@@ -73,13 +84,21 @@ function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
     }
   }, [selectPokemon]);
 
-  const toggleShowAll = () => setShowAll((current) => !current); // Toggle function
+  //show all/less handler
+  const toggleShowAll = () => {
+    setShowAll((current) => !current);
+    setTimeout(() => {
+      componentRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 10);
+  }; // Toggle function
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <>
-      <section className={style.container}>
+      <section className={style.container} ref={componentRef}>
         <div className={style.intro}>
           <h1>Select your fighter</h1>
         </div>
@@ -92,8 +111,24 @@ function MyPokemons({ user, currentUser, scrollToAllPokemon }) {
                 key={index}
                 className={style.pokemonContainer}
                 onClick={() => handlePokemonSelect(pokemon)}
+                style={{
+                  border:
+                    selectPokemon && selectPokemon.name === pokemon.name
+                      ? "5px solid green"
+                      : "3px solid black", // Default border for non-selected
+                }}
               >
-                <h3 className={style.pokemonName}>{pokemon.name}</h3>
+                <h3
+                  className={style.pokemonName}
+                  style={{
+                    color:
+                      selectPokemon && selectPokemon.name === pokemon.name
+                        ? "green"
+                        : "black",
+                  }}
+                >
+                  {pokemon.name}
+                </h3>
                 <div>
                   <img
                     className={style.pokemonImage}

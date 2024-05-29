@@ -1,14 +1,22 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { DataContext } from "../context/DataContext";
 import styles from "../styles/Battle.module.css";
 import { SelectPokeContext } from "../context/SelectPokeContext";
 import GoodPokemon from "./GoodPokemon";
 import BadPokemon from "./BadPokemon";
 import AlertWindow from "./AlertWindow";
+import AlertLost from "./AlertLost";
 
-function Battle({ user, setUser }) {
-  //Data
-  const { pokemon, loading } = useContext(DataContext);
+function Battle({
+  user,
+  setUser,
+  alertWindow,
+  setAlertWindow,
+  alertLost,
+  setAlertLost,
+}) {
+  //Refs
+  const alertWindowRef = useRef(null);
   //from context hook to select poke
   const {
     selectPokemon,
@@ -23,6 +31,10 @@ function Battle({ user, setUser }) {
   //Dynamic pokemon
   const [userPokemon, setUserPokemon] = useState(null);
   const [opponentPokemon, setOpponentPokemon] = useState(null);
+  //Disable button
+  const [disableButton, setDisableButton] = useState(false);
+  //Animation
+  const [animation, setAnimation] = useState(false);
   //HP counters
   const [userCount, setUserCount] = useState(5);
   const [opponentCount, setOpponentCount] = useState(5);
@@ -32,18 +44,22 @@ function Battle({ user, setUser }) {
   const [spAttackColor, setSpAttackColor] = useState();
   const [spDefenseColor, setSpDefenseColor] = useState();
   const [speedColor, setSpeedColor] = useState();
+  //Wait
+  const [wait, setWait] = useState(false);
   //Number of rounds tracker
   const [roundsCompleted, setRoundsCompleted] = useState(0);
   //User
   // const [user, setUser] = useState(null);
   //Alert window
-  const [alertWindow, setAlertWindow] = useState(false);
 
   // useEffect(() => {
   //   if (!user) {
   //     setUser(JSON.parse(localStorage.getItem("user")));
   //   }
   // }, [user]);
+
+  //Scroll to alert window
+  const scrollToWindow = () => alertWindowRef.current.scrollIntoView();
 
   //Set user pokemon
   useEffect(() => {
@@ -58,84 +74,6 @@ function Battle({ user, setUser }) {
       setOpponentPokemon(selectOpponent);
     }
   }, [selectOpponent]);
-
-  //Handle click (battle rounds & winner)
-  function handleClick() {
-    //If userpokemon attack > opponentpokemon attack setUserCount (count - 1)
-    function attackRound() {
-      if (userPokemon.base.Attack >= opponentPokemon.base.Attack) {
-        setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-        setAttackColor("green");
-      } else {
-        setUserCount((prevUserCount) => prevUserCount - 1);
-        //red background for style.base
-        setAttackColor("red");
-      }
-      //Completed round track
-      setRoundsCompleted((prevValue) => prevValue + 1);
-    }
-    attackRound();
-    //Same but for defense + 1sec delay
-    function defenseRound() {
-      setTimeout(() => {
-        if (userPokemon.base.Defense >= opponentPokemon.base.Defense) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setDefenseColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setDefenseColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 1000);
-    }
-    defenseRound();
-    //Same but for Sp Attack +2sec delay
-    function spAttackRound() {
-      setTimeout(() => {
-        if (
-          userPokemon.base["Sp. Attack"] >= opponentPokemon.base["Sp. Attack"]
-        ) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpAttackColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpAttackColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 2000);
-    }
-    spAttackRound();
-    //Same but for Sp Defense +3sec delay
-    function spDefenseRound() {
-      setTimeout(() => {
-        if (
-          userPokemon.base["Sp. Defense"] >= opponentPokemon.base["Sp. Defense"]
-        ) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpDefenseColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpDefenseColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 3000);
-    }
-    spDefenseRound();
-    //Same but for Speed +4sec delay
-    function speedRound() {
-      setTimeout(() => {
-        if (userPokemon.base.Speed >= opponentPokemon.base.Speed) {
-          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
-          setSpeedColor("green");
-        } else {
-          setUserCount((prevUserCount) => prevUserCount - 1);
-          setSpeedColor("red");
-        }
-        setRoundsCompleted((prevValue) => prevValue + 1);
-      }, 4000);
-    }
-    speedRound();
-  }
 
   //Update the user in database
   const updateUser = async (updatedUser) => {
@@ -163,6 +101,93 @@ function Battle({ user, setUser }) {
     }
   };
 
+  //Handle click (battle rounds & winner)
+  function handleClick() {
+    //Disable buton
+    setDisableButton(true);
+    //start animation
+    setAnimation(true);
+    //If userpokemon attack > opponentpokemon attack setUserCount (count - 1)
+    function attackRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Attack >= opponentPokemon.base.Attack) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setAttackColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          //red background for style.base
+          setAttackColor("red");
+        }
+        //Completed round track
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 200);
+    }
+    attackRound();
+    //Same but for defense + 1sec delay
+    function defenseRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Defense >= opponentPokemon.base.Defense) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setDefenseColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setDefenseColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 1200);
+    }
+    defenseRound();
+    //Same but for Sp Attack +2sec delay
+    function spAttackRound() {
+      setTimeout(() => {
+        if (
+          userPokemon.base["Sp. Attack"] >= opponentPokemon.base["Sp. Attack"]
+        ) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpAttackColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpAttackColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 2200);
+    }
+    spAttackRound();
+    //Same but for Sp Defense +3sec delay
+    function spDefenseRound() {
+      setTimeout(() => {
+        if (
+          userPokemon.base["Sp. Defense"] >= opponentPokemon.base["Sp. Defense"]
+        ) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpDefenseColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpDefenseColor("red");
+        }
+        setRoundsCompleted((prevValue) => prevValue + 1);
+      }, 3200);
+    }
+    spDefenseRound();
+    //Same but for Speed +4sec delay
+    function speedRound() {
+      setTimeout(() => {
+        if (userPokemon.base.Speed >= opponentPokemon.base.Speed) {
+          setOpponentCount((prevOpponentCount) => prevOpponentCount - 1);
+          setSpeedColor("green");
+        } else {
+          setUserCount((prevUserCount) => prevUserCount - 1);
+          setSpeedColor("red");
+        }
+        //Wait for animation to finish before adding the last round
+        setTimeout(() => {
+          setRoundsCompleted((prevValue) => prevValue + 1);
+        }, 600);
+      }, 4200);
+    }
+    speedRound();
+  }
+
   //If rounds completed === 5:
   //If (userCounter > opponentCounter), user wins
   //Else, user looses
@@ -188,13 +213,16 @@ function Battle({ user, setUser }) {
             setSelectOpponent(false);
             // alert("You win! New pokemon added");
             setAlertWindow(true);
+            setTimeout(scrollToWindow, 3);
           }
         } else {
-          alert("You lose :(");
+          // alert("You lose :(");
           setUserPokemon(false);
           setOpponentPokemon(false);
           setSelectPokemon(false);
           setSelectOpponent(false);
+          setAlertLost(true);
+          setTimeout(scrollToWindow, 3);
         }
         // Reset rounds for next battle
         setRoundsCompleted(0);
@@ -209,6 +237,10 @@ function Battle({ user, setUser }) {
         setSpeedColor(null);
         //Battle count +1
         setBattleCount((prevCount) => prevCount + 1);
+        //Enable button
+        setDisableButton(false);
+        //disable animation
+        setAnimation(false);
       }, 100);
     }
   }, [roundsCompleted, userCount, opponentCount, user, setUser]);
@@ -222,70 +254,104 @@ function Battle({ user, setUser }) {
 
   return (
     <>
-      <div className={styles.masterContainer}>
+      {userPokemon && opponentPokemon && (
         <div className={styles.battle_container}>
-          {userPokemon && opponentPokemon && (
-            <div className={styles.battle_component}>
-              <h1 className={styles.title}>Battlefield</h1>
-              <div className={styles.battle_container}>
-                <div className={styles.pokemon_box}>
-                  <h3>HP: {userCount}/5</h3>
-                  <h2>{userPokemon && userPokemon.namejapanese}</h2>
-                  <img
-                    src={userPokemon && userPokemon.image}
-                    alt="user pokemon"
-                  />
+          <div className={styles.battle_component}>
+            <h1 className={styles.title}>Battlefield</h1>
+            <div className={styles.element_container}>
+              <div className={styles.pokemon_box}>
+                <h3>HP: {userCount}/5</h3>
+                {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
+                <style>
+                  {`
+@keyframes moveDiagonallyR {
+    0%, 100% { 
+      transform: translate(0, 0); 
+    }
+    50% { 
+      transform: translate(100px, -40px);
+    }
+  }
+`}
+                </style>
+                <img
+                  src={userPokemon && userPokemon.image}
+                  alt="user pokemon"
+                  style={{
+                    position: animation && "relative",
+                    animation: animation && "moveDiagonallyR 1s 5",
+                  }}
+                />
+              </div>
+              <div className={styles.scoreboard}>
+                <div
+                  className={styles.base}
+                  style={{ background: attackColor }}
+                >
+                  Attack
                 </div>
-                <div className={styles.scoreboard}>
-                  <div
-                    className={styles.base}
-                    style={{ background: attackColor }}
-                  >
-                    Attack
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: defenseColor }}
-                  >
-                    Defense
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: spAttackColor }}
-                  >
-                    Sp. Attack
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: spDefenseColor }}
-                  >
-                    Sp. Defense
-                  </div>
-                  <div
-                    className={styles.base}
-                    style={{ background: speedColor }}
-                  >
-                    Speed
-                  </div>
+                <div
+                  className={styles.base}
+                  style={{ background: defenseColor }}
+                >
+                  Defense
                 </div>
-                <div className={styles.pokemon_box}>
-                  <h3>HP: {opponentCount}/5</h3>
-                  <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2>
-                  <img
-                    src={opponentPokemon && opponentPokemon.image.hires}
-                    alt="opponent pokemon"
-                  />
+                <div
+                  className={styles.base}
+                  style={{ background: spAttackColor }}
+                >
+                  Sp. Attack
+                </div>
+                <div
+                  className={styles.base}
+                  style={{ background: spDefenseColor }}
+                >
+                  Sp. Defense
+                </div>
+                <div className={styles.base} style={{ background: speedColor }}>
+                  Speed
                 </div>
               </div>
-              <div className={styles.btn_container}>
-                <button className={styles.fight_btn} onClick={handleClick}>
-                  Fight!
-                </button>
+              <div className={styles.pokemon_box}>
+                <h3>HP: {opponentCount}/5</h3>
+                {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
+                <style>
+                  {`
+@keyframes moveDiagonallyL {
+    0%, 100% { 
+      transform: translate(0, 0); 
+    }
+    50% { 
+      transform: translate(-100px, -40px);
+    }
+  }
+`}
+                </style>
+                <img
+                  src={opponentPokemon && opponentPokemon.image.hires}
+                  alt="opponent pokemon"
+                  style={{
+                    position: animation && "relative",
+                    animation: animation && "moveDiagonallyL 1s 5",
+                  }}
+                />
               </div>
             </div>
-          )}
+            <div className={styles.btn_container}>
+              <button
+                className={styles.fight_btn}
+                disabled={disableButton}
+                onClick={handleClick}
+              >
+                Fight!
+              </button>
+            </div>
+          </div>
         </div>
-        {alertWindow && <AlertWindow />}
+      )}
+      <div ref={alertWindowRef}>
+        {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
+        {alertLost && <AlertLost setAlertLost={setAlertLost} />}
       </div>
     </>
   );
