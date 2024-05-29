@@ -53,8 +53,6 @@ export default function Signup({ setUser }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </div>
-        <div className={style.inputContainer}>
           <label className={style.label}>password:</label>
           <input
             className={`${style.passwordInput} ${style.input}`}

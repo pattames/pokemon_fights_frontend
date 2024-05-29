@@ -52,11 +52,12 @@ export default function Login({ onAuthenticate }) {
       <form className={style.form} onSubmit={handleSubmit}>
         <h3 className={style.title}>Login</h3>
         <div className={style.inputContainer}>
-          <label className={style.label}>username:</label>
+          {/* <label className={style.label}>Username:</label> */}
           <input
             className={`${style.usernameInput} ${style.input}`}
             type="text"
             value={username}
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
           {storedUser && (
@@ -64,13 +65,12 @@ export default function Login({ onAuthenticate }) {
               Auto-fill
             </button>
           )}
-        </div>
-        <div className={style.inputContainer}>
-          <label className={style.label}>password:</label>
+          {/* <label className={style.label}>Password:</label> */}
           <input
             className={`${style.passwordInput} ${style.input}`}
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

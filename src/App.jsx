@@ -116,8 +116,13 @@ function App() {
           !authenticated ? (
             <>
               <div className={style.authContainer}>
+                <img
+                  src="src/public/pokemon.svg"
+                  alt="pokemon logo"
+                  className={style.logo}
+                />
                 <Login setUser={setUser} onAuthenticate={handleAuthenticate} />
-                <Signup setUser={setUser} />
+                {/* <Signup setUser={setUser} /> */}
               </div>
             </>
           ) : (
