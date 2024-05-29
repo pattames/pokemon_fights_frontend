@@ -23,6 +23,8 @@ function App() {
   const leaderboardRef = useRef(null);
   const battleRef = useRef(null);
   const myPokemonRef = useRef(null);
+  //Register or log in
+  const [register, setRegister] = useState(true);
 
   const { battleCount } = useContext(SelectPokeContext);
 
@@ -116,8 +118,41 @@ function App() {
           !authenticated ? (
             <>
               <div className={style.authContainer}>
-                <Login setUser={setUser} onAuthenticate={handleAuthenticate} />
-                <Signup setUser={setUser} />
+                <img
+                  src="src/public/pokemon.svg"
+                  alt="pokemon logo"
+                  className={style.logo}
+                />
+                {register ? (
+                  <div>
+                    <Signup setUser={setUser} />
+                    <p className={style.message}>
+                      Already have an account?{" "}
+                      <span
+                        className={style.message_span}
+                        onClick={() => setRegister(false)}
+                      >
+                        Log In
+                      </span>
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <Login
+                      setUser={setUser}
+                      onAuthenticate={handleAuthenticate}
+                    />
+                    <p className={style.message}>
+                      Don't have an account?{" "}
+                      <span
+                        className={style.message_span}
+                        onClick={() => setRegister(true)}
+                      >
+                        Register
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
             </>
           ) : (
