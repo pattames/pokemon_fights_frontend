@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useReducer } from "react";
-
+import { useState } from "react";
 import style from "../styles/Signup.module.css";
 
 export default function Signup({ setUser }) {
@@ -40,9 +38,6 @@ export default function Signup({ setUser }) {
     setIsLoading(false);
     setUsername("");
     setPassword("");
-
-    console.log(data);
-    // alert("User created. Please log in");
   };
 
   return (
@@ -50,7 +45,6 @@ export default function Signup({ setUser }) {
       <form className={style.form} onSubmit={handleSubmit}>
         <h3 className={style.title}>Register!</h3>
         <div className={style.inputContainer}>
-          {/* <label className={style.label}>Username:</label> */}
           <input
             className={`${style.usernameInput} ${style.input}`}
             type="text"
@@ -58,7 +52,6 @@ export default function Signup({ setUser }) {
             placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
-          {/* <label className={style.label}>password:</label> */}
           <input
             className={`${style.passwordInput} ${style.input}`}
             type="password"

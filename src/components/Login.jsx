@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import style from "../styles/Login.module.css";
 
 export default function Login({ onAuthenticate }) {
@@ -56,7 +55,6 @@ export default function Login({ onAuthenticate }) {
       <form className={style.form} onSubmit={handleSubmit}>
         <h3 className={style.title}>Log In!</h3>
         <div className={style.inputContainer}>
-          {/* <label className={style.label}>Username:</label> */}
           <input
             className={`${style.usernameInput} ${style.input}`}
             type="text"
@@ -69,7 +67,6 @@ export default function Login({ onAuthenticate }) {
               Auto-fill
             </button>
           )}
-          {/* <label className={style.label}>Password:</label> */}
           <input
             className={`${style.passwordInput} ${style.input}`}
             type="password"

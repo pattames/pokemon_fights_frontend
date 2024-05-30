@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext, useRef } from "react";
 import style from "./styles/Auth.module.css";
-import { AuthContext } from "./context/authContext";
 import MyPokemons from "./components/MyPokemons";
 import MainContent from "./components/MainContent";
 import NavBar from "./components/NavBar";
@@ -42,8 +41,6 @@ function App() {
     setUser(JSON.parse(localStorage.getItem("user")));
     // setAuthenticated(true);
   };
-
-  console.log(authenticated);
 
   return (
     <Routes>

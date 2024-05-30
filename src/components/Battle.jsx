@@ -1,9 +1,6 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { DataContext } from "../context/DataContext";
 import styles from "../styles/Battle.module.css";
 import { SelectPokeContext } from "../context/SelectPokeContext";
-import GoodPokemon from "./GoodPokemon";
-import BadPokemon from "./BadPokemon";
 import AlertWindow from "./AlertWindow";
 import AlertLost from "./AlertLost";
 
@@ -44,8 +41,6 @@ function Battle({
   const [spAttackColor, setSpAttackColor] = useState();
   const [spDefenseColor, setSpDefenseColor] = useState();
   const [speedColor, setSpeedColor] = useState();
-  //Wait
-  const [wait, setWait] = useState(false);
   //Number of rounds tracker
   const [roundsCompleted, setRoundsCompleted] = useState(0);
   //User
@@ -245,13 +240,6 @@ function Battle({
     }
   }, [roundsCompleted, userCount, opponentCount, user, setUser]);
 
-  //data check without repetitions
-  // useEffect(() => {
-  //   if (!loading) {
-  //     console.log("Data in battle component:", userCount);
-  //   }
-  // }, [userPokemon, opponentPokemon, loading, user]);
-
   return (
     <>
       {userPokemon && opponentPokemon && (
@@ -261,7 +249,6 @@ function Battle({
             <div className={styles.element_container}>
               <div className={styles.pokemon_box}>
                 <h3>HP: {userCount}/5</h3>
-                {/* <h2>{userPokemon && userPokemon.namejapanese}</h2> */}
                 <style>
                   {`
 @keyframes moveDiagonallyR {
@@ -314,7 +301,6 @@ function Battle({
               </div>
               <div className={styles.pokemon_box}>
                 <h3>HP: {opponentCount}/5</h3>
-                {/* <h2>{opponentPokemon && opponentPokemon.name.japanese}</h2> */}
                 <style>
                   {`
 @keyframes moveDiagonallyL {
