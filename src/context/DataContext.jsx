@@ -11,7 +11,7 @@ export default function DataContextProvider(props) {
   const getPokemons = async () => {
     const productionAPI = "http://localhost:8080/pokemon";
     const API = "https://pokemon-fight-backend-r6vc.onrender.com/pokemon";
-    const res = await fetch(productionAPI);
+    const res = await fetch(API);
     const data = await res.json();
     // console.log(data.data);
     setPokemon(data.data);
