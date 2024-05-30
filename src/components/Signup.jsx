@@ -14,9 +14,9 @@ export default function Signup({ setUser }) {
 
     //APIs
     const productionAPI = "http://localhost:8080/users/signup";
-    const API = "https://pokemon-fight-backend-al3u.onrender.com/users/signup";
+    const API = "https://pokemon-fight-backend-r6vc.onrender.com/users/signup";
 
-    const response = await fetch(productionAPI, {
+    const response = await fetch(API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

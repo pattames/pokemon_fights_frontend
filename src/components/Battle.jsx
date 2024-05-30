@@ -73,10 +73,10 @@ function Battle({
   //Update the user in database
   const updateUser = async (updatedUser) => {
     const productionAPI = `http://localhost:8080/users/${updatedUser._id}`;
-    const API = `https://pokemon-fight-backend-al3u.onrender.com/users/${updatedUser._id}`;
+    const API = `https://pokemon-fight-backend-r6vc.onrender.com/users/${updatedUser._id}`;
 
     try {
-      const response = await fetch(productionAPI, {
+      const response = await fetch(API, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
