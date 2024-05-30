@@ -33,7 +33,7 @@ function App() {
       setUser(JSON.parse(localStorage.getItem("user")));
     }
     const userData = localStorage.getItem("user");
-    if (userData && user && user.pokemons.length) {
+    if (userData && user) {
       setAuthenticated(true);
     }
   }, [user]);
@@ -43,10 +43,12 @@ function App() {
     // setAuthenticated(true);
   };
 
+  console.log(authenticated);
+
   return (
     <Routes>
       <Route
-        path="/"
+        path="/landing"
         element={
           authenticated ? (
             <>
@@ -63,7 +65,7 @@ function App() {
                 }
               />
               <MainContent username={user?.username} />
-              {user && user.pokemons.length && (
+              {user && (
                 <div ref={myPokemonRef}>
                   <MyPokemons
                     key={battleCount}
@@ -108,12 +110,12 @@ function App() {
               </div>
             </>
           ) : (
-            <Navigate to={"/login_signup"} />
+            <Navigate to={"/"} />
           )
         }
       />
       <Route
-        path="/login_signup"
+        path="/"
         element={
           !authenticated ? (
             <>
@@ -156,7 +158,7 @@ function App() {
               </div>
             </>
           ) : (
-            user && user.pokemons.length && <Navigate to={"/"} />
+            user && <Navigate to={"/landing"} />
           )
         }
       />
