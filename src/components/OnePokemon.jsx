@@ -14,7 +14,7 @@ export default function OnePokemon() {
     const productionAPI = `http://localhost:8080/pokemon/${pokemonId}`;
     const API = `https://pokemon-fight-backend-al3u.onrender.com/pokemon/${pokemonId}`;
 
-    const response = await fetch(API);
+    const response = await fetch(productionAPI);
     const data = await response.json();
     setSelectedPokemon(data); // Update selectedPokemon state. TRY WITH ONCLIK MAYBE ?????
   };

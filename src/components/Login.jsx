@@ -31,7 +31,7 @@ export default function Login({ onAuthenticate }) {
     const productionAPI = "http://localhost:8080/users/login";
     const API = "https://pokemon-fight-backend-al3u.onrender.com/users/login";
 
-    const response = await fetch(API, {
+    const response = await fetch(productionAPI, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

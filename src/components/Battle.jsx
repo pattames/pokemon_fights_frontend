@@ -81,7 +81,7 @@ function Battle({
     const API = `https://pokemon-fight-backend-al3u.onrender.com/users/${updatedUser._id}`;
 
     try {
-      const response = await fetch(API, {
+      const response = await fetch(productionAPI, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
