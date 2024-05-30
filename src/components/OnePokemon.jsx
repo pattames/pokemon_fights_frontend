@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
-import '../styles/StyleOnePokemon.css';
-import { DataContext } from '../context/DataContext';
+import { useContext, useState, useEffect } from "react";
+import "../styles/StyleOnePokemon.css";
+import { DataContext } from "../context/DataContext";
 
 export default function OnePokemon() {
   const { pokemon, loading } = useContext(DataContext); //GPTTTT
@@ -10,7 +10,11 @@ export default function OnePokemon() {
   const fetchPokemonDetails = async (pokemonId) => {
     if (!pokemonId) return; // IF NO POKEMON SELECTED no Pokemon selected
 
-    const response = await fetch(`http://localhost:8080/pokemon/${pokemonId}`);
+    //APIs
+    const productionAPI = `http://localhost:8080/pokemon/${pokemonId}`;
+    const API = `https://pokemon-fight-backend-al3u.onrender.com/pokemon/${pokemonId}`;
+
+    const response = await fetch(API);
     const data = await response.json();
     setSelectedPokemon(data); // Update selectedPokemon state. TRY WITH ONCLIK MAYBE ?????
   };
@@ -21,12 +25,13 @@ export default function OnePokemon() {
     }
   }, [selectedPokemonId]);
 
-
-
   return (
     <div className="card">
       <h2>This is One Pokemon component</h2>
-      <select value={selectedPokemonId} onChange={(event) => setSelectedPokemonId(event.target.value)}>
+      <select
+        value={selectedPokemonId}
+        onChange={(event) => setSelectedPokemonId(event.target.value)}
+      >
         <option value="">Select a Pokemon</option>
         {pokemon.map((poke) => (
           <option key={poke.id} value={poke.id}>
@@ -35,7 +40,7 @@ export default function OnePokemon() {
         ))}
       </select>
       {loading && <p>Loading Pokemon...</p>}
-      {selectedPokemon && ( // Conditionally render details GPTTTTTTTTTTTT
+      {selectedPokemon && ( // Conditionally render details GPT
         <>
           <h2>Pokemon name: {selectedPokemon.name.english}</h2>
           <h2>ID: {selectedPokemon.id}</h2>

@@ -77,17 +77,17 @@ function Battle({
 
   //Update the user in database
   const updateUser = async (updatedUser) => {
+    const productionAPI = `http://localhost:8080/users/${updatedUser._id}`;
+    const API = `https://pokemon-fight-backend-al3u.onrender.com/users/${updatedUser._id}`;
+
     try {
-      const response = await fetch(
-        `http://localhost:8080/users/${updatedUser._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        }
-      );
+      const response = await fetch(API, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update user pokemons");
