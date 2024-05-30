@@ -9,14 +9,18 @@ export default function DataContextProvider(props) {
   const [loading, setLoading] = useState(true); // New loading state
 
   const getPokemons = async () => {
-    const res = await fetch("http://localhost:8080/pokemon");
+    const productionAPI = "http://localhost:8080/pokemon";
+    const API = "https://pokemon-fight-backend-al3u.onrender.com/pokemon";
+    const res = await fetch(productionAPI);
     const data = await res.json();
     // console.log(data.data);
     setPokemon(data.data);
   };
 
   const getUsers = async () => {
-    const res = await fetch("http://localhost:8080/users/");
+    const productionAPI = "http://localhost:8080/users/";
+    const API = "https://pokemon-fight-backend-al3u.onrender.com/users";
+    const res = await fetch(productionAPI);
     const data = await res.json();
     // console.log(data.data);
     setUsers(data.data);
