@@ -9,8 +9,10 @@ export default function DataContextProvider(props) {
   const [loading, setLoading] = useState(true); // New loading state
 
   const getPokemons = async () => {
+    //APIs
     const productionAPI = "http://localhost:8080/pokemon";
     const API = "https://pokemon-fight-backend-r6vc.onrender.com/pokemon";
+
     const res = await fetch(API);
     const data = await res.json();
     // console.log(data.data);
@@ -18,8 +20,10 @@ export default function DataContextProvider(props) {
   };
 
   const getUsers = async () => {
+    //APIs
     const productionAPI = "http://localhost:8080/users";
     const API = "https://pokemon-fight-backend-r6vc.onrender.com/users";
+
     const res = await fetch(API);
     const data = await res.json();
     // console.log(data.data);

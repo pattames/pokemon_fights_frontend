@@ -72,6 +72,7 @@ function Battle({
 
   //Update the user in database
   const updateUser = async (updatedUser) => {
+    //APIs
     const productionAPI = `http://localhost:8080/users/${updatedUser._id}`;
     const API = `https://pokemon-fight-backend-r6vc.onrender.com/users/${updatedUser._id}`;
 

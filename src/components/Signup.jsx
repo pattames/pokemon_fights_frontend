@@ -60,7 +60,14 @@ export default function Signup({ setUser }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className={style.button} disabled={isLoading}>
+        <button
+          className={style.button}
+          disabled={isLoading}
+          style={{
+            transform: isLoading && "none",
+            cursor: isLoading && "wait",
+          }}
+        >
           {isLoading ? "Loading..." : "Register"}
         </button>
         {error && <div className="error">{error}</div>}

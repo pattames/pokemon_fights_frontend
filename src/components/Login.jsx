@@ -75,7 +75,16 @@ export default function Login({ onAuthenticate }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className={style.button}>Log in</button>
+        <button
+          className={style.button}
+          disabled={isLoading}
+          style={{
+            transform: isLoading && "none",
+            cursor: isLoading && "wait",
+          }}
+        >
+          {isLoading ? "Loading..." : "Log In"}
+        </button>
         {error && <div className="error">{error}</div>}
       </form>
     </div>
