@@ -24,6 +24,8 @@ function App() {
   const myPokemonRef = useRef(null);
   //Register or log in
   const [register, setRegister] = useState(true);
+  //Loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const { battleCount } = useContext(SelectPokeContext);
 
@@ -124,12 +126,17 @@ function App() {
                 />
                 {register ? (
                   <div>
-                    <Signup setUser={setUser} />
+                    <Signup
+                      setUser={setUser}
+                      isLoading={isLoading}
+                      setIsLoading={setIsLoading}
+                    />
                     <p className={style.message}>
                       Already have an account?{" "}
                       <span
                         className={style.message_span}
-                        onClick={() => setRegister(false)}
+                        onClick={() => !isLoading && setRegister(false)}
+                        style={{ cursor: isLoading && "wait" }}
                       >
                         Log In
                       </span>
@@ -140,12 +147,15 @@ function App() {
                     <Login
                       setUser={setUser}
                       onAuthenticate={handleAuthenticate}
+                      isLoading={isLoading}
+                      setIsLoading={setIsLoading}
                     />
                     <p className={style.message}>
                       Don't have an account?{" "}
                       <span
                         className={style.message_span}
-                        onClick={() => setRegister(true)}
+                        onClick={() => !isLoading && setRegister(true)}
+                        style={{ cursor: isLoading && "wait" }}
                       >
                         Register
                       </span>
