@@ -1,4 +1,3 @@
-import { useTheme } from "../context/ThemeContext";
 import style from "../styles/NavBar.module.css";
 import { default as LeaderboardImg } from "../public/leaderboard-icon.svg";
 import { default as PokedexImg } from "../public/pokeball.svg";

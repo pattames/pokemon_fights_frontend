@@ -9,30 +9,27 @@ export default function DataContextProvider(props) {
   const [loading, setLoading] = useState(true); // New loading state
 
   const getPokemons = async () => {
+    //APIs
     const productionAPI = "http://localhost:8080/pokemon";
-    const API = "https://pokemon-fight-backend-al3u.onrender.com/pokemon";
-    const res = await fetch(productionAPI);
+    const API = "https://pokemon-fight-backend-r6vc.onrender.com/pokemon";
+
+    const res = await fetch(API);
     const data = await res.json();
     // console.log(data.data);
     setPokemon(data.data);
   };
 
   const getUsers = async () => {
-    const productionAPI = "http://localhost:8080/users/";
-    const API = "https://pokemon-fight-backend-al3u.onrender.com/users";
-    const res = await fetch(productionAPI);
+    //APIs
+    const productionAPI = "http://localhost:8080/users";
+    const API = "https://pokemon-fight-backend-r6vc.onrender.com/users";
+
+    const res = await fetch(API);
     const data = await res.json();
     // console.log(data.data);
     setUsers(data.data);
     setLoading(false); // Set loading to false after users are fetched
   };
-
-  // const getUser = async (id) => {
-  //   const res = await fetch(`http://localhost:8080/users/${id}`);
-  //   const data = await res.json();
-  //   // console.log(data.data);
-  //   setUser(data.data);
-  // };
 
   useEffect(() => {
     getPokemons();
