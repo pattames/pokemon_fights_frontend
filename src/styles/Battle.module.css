@@ -7,7 +7,7 @@
     /* border: solid 3px black; */
     max-width: 80rem;
     padding: 3rem 0;
-    background-image: url("arena2.webp");
+    background-image: url("arena2.jpeg");
     background-size: cover;
     background-position: center;
     /* border-radius: 5px; */
@@ -40,6 +40,7 @@
           margin: 1rem;
           border-radius: 5px;
           width: 50%;
+          max-width: 23rem;
         }
       }
       .scoreboard {
