@@ -47,9 +47,9 @@ function App() {
   return (
     <Routes>
       <Route
-        path="/landing"
+        path="/"
         element={
-          authenticated ? (
+          user ? (
             <>
               <NavBar
                 scrollToMyPokemon={() =>
@@ -109,14 +109,6 @@ function App() {
               </div>
             </>
           ) : (
-            <Navigate to={"/"} />
-          )
-        }
-      />
-      <Route
-        path="/"
-        element={
-          !authenticated ? (
             <>
               <div className={style.authContainer}>
                 <img
@@ -164,8 +156,6 @@ function App() {
                 )}
               </div>
             </>
-          ) : (
-            user && <Navigate to={"/landing"} />
           )
         }
       />

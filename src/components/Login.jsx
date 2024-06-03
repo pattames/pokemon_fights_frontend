@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import style from "../styles/Login.module.css";
 import { MoonLoader } from "react-spinners";
 
-export default function Login({ onAuthenticate, isLoading, setIsLoading }) {
+export default function Login({
+  onAuthenticate,
+  isLoading,
+  setIsLoading,
+  setUser,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -45,6 +50,7 @@ export default function Login({ onAuthenticate, isLoading, setIsLoading }) {
 
     if (response.ok) {
       localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
       setIsLoading(false);
       onAuthenticate(username);
     }
