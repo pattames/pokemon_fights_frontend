@@ -9,15 +9,17 @@ import AuthContextProvider from "./context/authContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx"; // Import your ThemeProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <ThemeProvider>
-      <AuthContextProvider>
-        <SelectPokeContextProvider>
-          <DataContextProvider>
-            <App />
-          </DataContextProvider>
-        </SelectPokeContextProvider>
-      </AuthContextProvider>
-    </ThemeProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <ThemeProvider>
+        <AuthContextProvider>
+          <SelectPokeContextProvider>
+            <DataContextProvider>
+              <App />
+            </DataContextProvider>
+          </SelectPokeContextProvider>
+        </AuthContextProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

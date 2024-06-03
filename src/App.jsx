@@ -112,7 +112,7 @@ function App() {
             <>
               <div className={style.authContainer}>
                 <img
-                  src="src/public/pokemon.svg"
+                  src="pokemon.svg"
                   alt="pokemon logo"
                   className={style.logo}
                 />
