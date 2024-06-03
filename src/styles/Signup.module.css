@@ -1,40 +1,72 @@
-/* The Signup component has the same styles as the Login component. */
 .container {
-  composes: container from "./Login.module.css";
+  border: solid black 3px;
+  /* width: 600px; */
 }
 
 .form {
-  composes: form from "./Login.module.css";
+  /* padding: 20px; */
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
 }
 
 .title {
-  composes: title from "./Login.module.css";
+  font-size: 2rem;
+  margin: 0;
 }
 
 .inputContainer {
-  composes: inputContainer from "./Login.module.css";
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .label {
-  composes: label from "./Login.module.css";
+  display: block;
+  width: 100px;
+  font-size: 20px;
 }
 
 .input {
-  composes: input from "./Login.module.css";
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  border: none;
+  background-color: rgb(222, 222, 222);
+  border-radius: 5px;
 }
+/* .input:focus {
+  border: solid green 3px;
+} */
 
-.usernameInput {
-  composes: usernameInput from "./Login.module.css";
-}
+/* .usernameInput {
+  background-color: green;
+} */
 
 .autofill {
-  composes: autofill from "./Login.module.css";
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  width: 100px;
+  font-size: 1.1rem;
 }
 
-.passwordInput {
-  composes: passwordInput from "./Login.module.css";
-}
+/* .passwordInput {
+  background-color: blue;
+} */
 
 .button {
-  composes: button from "./Login.module.css";
+  border-radius: 5px;
+  border: solid black 2px;
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  /* max-width: 70%; */
+  margin: 0 auto;
+}
+.button:hover {
+  transform: scale(1.1);
 }
