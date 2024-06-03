@@ -29,15 +29,16 @@ export default function Signup({ setUser, isLoading, setIsLoading }) {
       setError(data.error);
       setUsername("");
       setPassword("");
-      return;
     }
 
-    console.log("RESPONSE WAS OK");
-    localStorage.setItem("user", JSON.stringify(data));
-    setUser(data);
-    setIsLoading(false);
-    setUsername("");
-    setPassword("");
+    if (response.ok) {
+      console.log("RESPONSE WAS OK");
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+      setIsLoading(false);
+      setUsername("");
+      setPassword("");
+    }
   };
 
   return (
