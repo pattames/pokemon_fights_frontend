@@ -209,7 +209,7 @@ function Battle({
             setSelectOpponent(false);
             // alert("You win! New pokemon added");
             setAlertWindow(true);
-            setTimeout(scrollToWindow, 3);
+            setTimeout(scrollToWindow, 15);
           }
         } else {
           // alert("You lose :(");
@@ -218,7 +218,7 @@ function Battle({
           setSelectPokemon(false);
           setSelectOpponent(false);
           setAlertLost(true);
-          setTimeout(scrollToWindow, 3);
+          setTimeout(scrollToWindow, 15);
         }
         // Reset rounds for next battle
         setRoundsCompleted(0);
