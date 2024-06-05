@@ -2,10 +2,11 @@ import styles from "../styles/AlertWindow.module.css";
 
 export default function AlertWindow({ setAlertWindow }) {
   const clickHandler = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setAlertWindow(false);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setAlertWindow(false);
+    }, 3);
   };
-
   return (
     <div className={styles.window}>
       <div className={styles.container}>
