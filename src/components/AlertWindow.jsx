@@ -5,7 +5,7 @@ export default function AlertWindow({ setAlertWindow }) {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setAlertWindow(false);
-    }, 3);
+    }, 15);
   };
   return (
     <div className={styles.window}>

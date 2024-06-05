@@ -5,7 +5,7 @@ export default function AlertLost({ setAlertLost }) {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setAlertLost(false);
-    }, 3);
+    }, 15);
   };
 
   return (
