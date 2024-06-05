@@ -2,8 +2,10 @@ import styles from "../styles/AlertLost.module.css";
 
 export default function AlertLost({ setAlertLost }) {
   const clickHandler = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setAlertLost(false);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setAlertLost(false);
+    }, 3);
   };
 
   return (
