@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "../styles/Signup.module.css";
+import style from "../styles/Login.module.css";
 import { MoonLoader } from "react-spinners";
 
 export default function Signup({ setUser, isLoading, setIsLoading }) {

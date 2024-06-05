@@ -117,7 +117,7 @@ function App() {
                   className={style.logo}
                 />
                 {register ? (
-                  <div>
+                  <>
                     <Signup
                       setUser={setUser}
                       isLoading={isLoading}
@@ -133,9 +133,9 @@ function App() {
                         Log In
                       </span>
                     </p>
-                  </div>
+                  </>
                 ) : (
-                  <div>
+                  <>
                     <Login
                       setUser={setUser}
                       onAuthenticate={handleAuthenticate}
@@ -152,7 +152,7 @@ function App() {
                         Register
                       </span>
                     </p>
-                  </div>
+                  </>
                 )}
               </div>
             </>

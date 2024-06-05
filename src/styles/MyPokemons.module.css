@@ -32,13 +32,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* gap: 2.5rem; */
-  /* border: 3px solid blue; */
-  /* padding: 1%;
-  margin: 1% 0 2%; */
-  /* padding: 2rem 10rem; */
   flex-wrap: wrap;
-  margin: 0 3rem;
+  /* margin: 0 3rem; */
+  margin: 0 1rem;
 }
 
 .pokemonContainer {
