@@ -11,6 +11,7 @@ function Battle({
   setAlertWindow,
   alertLost,
   setAlertLost,
+  scrollToWelcome,
 }) {
   //Refs
   const alertWindowRef = useRef(null);
@@ -337,8 +338,18 @@ function Battle({
         </div>
       )}
       <div ref={alertWindowRef}>
-        {alertWindow && <AlertWindow setAlertWindow={setAlertWindow} />}
-        {alertLost && <AlertLost setAlertLost={setAlertLost} />}
+        {alertWindow && (
+          <AlertWindow
+            setAlertWindow={setAlertWindow}
+            scrollToWelcome={scrollToWelcome}
+          />
+        )}
+        {alertLost && (
+          <AlertLost
+            setAlertLost={setAlertLost}
+            scrollToWelcome={scrollToWelcome}
+          />
+        )}
       </div>
     </>
   );

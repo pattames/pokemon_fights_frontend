@@ -22,6 +22,7 @@ function App() {
   const leaderboardRef = useRef(null);
   const battleRef = useRef(null);
   const myPokemonRef = useRef(null);
+  const welcomeRef = useRef(null);
   //Register or log in
   const [register, setRegister] = useState(true);
   //Loading
@@ -63,7 +64,9 @@ function App() {
                   })
                 }
               />
-              <MainContent username={user?.username} />
+              <div ref={welcomeRef}>
+                <MainContent username={user?.username} />
+              </div>
               {user && (
                 <div ref={myPokemonRef}>
                   <MyPokemons
@@ -93,8 +96,8 @@ function App() {
                 <Battle
                   user={user}
                   setUser={setUser}
-                  scrollToTopPage={() =>
-                    topPageRef.current.scrollIntoView({
+                  scrollToWelcome={() =>
+                    welcomeRef.current.scrollIntoView({
                       behavior: "smooth",
                     })
                   }
