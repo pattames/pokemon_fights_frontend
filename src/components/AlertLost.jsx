@@ -1,11 +1,16 @@
 import styles from "../styles/AlertLost.module.css";
 
-export default function AlertLost({ setAlertLost }) {
+export default function AlertLost({ setAlertLost, scrollToWelcome }) {
+  // const clickHandler = () => {
+  //   setTimeout(() => {
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //     setAlertLost(false);
+  //   }, 1000);
+  // };
+
   const clickHandler = () => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setAlertLost(false);
-    }, 1000);
+    setAlertLost(false);
+    scrollToWelcome();
   };
 
   return (
