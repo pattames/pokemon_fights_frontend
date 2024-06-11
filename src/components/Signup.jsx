@@ -68,6 +68,11 @@ export default function Signup({ setUser, isLoading, setIsLoading }) {
             />
           </div>
         )}
+        {error && (
+          <div className="error" style={{ color: "red" }}>
+            {error}
+          </div>
+        )}
         <button
           className={style.button}
           disabled={isLoading}
@@ -78,7 +83,6 @@ export default function Signup({ setUser, isLoading, setIsLoading }) {
         >
           {isLoading ? "Loading..." : "Register"}
         </button>
-        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
