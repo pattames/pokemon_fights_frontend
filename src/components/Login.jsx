@@ -88,6 +88,11 @@ export default function Login({
             />
           </div>
         )}
+        {error && (
+          <div className="error" style={{ color: "red" }}>
+            {error}
+          </div>
+        )}
         <button
           className={style.button}
           disabled={isLoading}
@@ -98,7 +103,6 @@ export default function Login({
         >
           {isLoading ? "Loading..." : "Log In"}
         </button>
-        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
